@@ -1,0 +1,21 @@
+feign:
+  client:
+    config:
+      default:
+        readTimeout: 1500
+        connectTimeout: 500
+
+
+oxc:
+  service:
+    base:
+      url: https://openexchangerates.org
+    name: openExchange
+    key: 60b9861d64c44caaa7ed56c2d40f36ad
+
+giphy:
+  service:
+    base:
+      url: https://api.giphy.com
+    name: giphyAPI
+    key: C7uWSuhiWE4j7Kn3BzetqSMw3tSK5OkW
