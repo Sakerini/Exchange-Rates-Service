@@ -10,6 +10,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -46,6 +48,28 @@ public class OpenExchangeServiceImpl implements OpenExchangeService {
     }
 
     @Override
+    public Map<String, BigDecimal> getAllCurrenciesYesterday() {
+        log.info("Inside OpenExchangeService getAllCurrencies YESTERDAY calling openExchangeApi");
+        RatesDTO ratesDto;
+        try {
+            String date = getYesterdayDate();
+            ratesDto = openExchangeApi.getAllCurrenciesByDate(date, openExchangeKey, baseCurrency);
+        } catch (RetryableException exc) {
+            log.error("Exception {} Returned empty list", exc.getMessage());
+            return new HashMap<>();
+        }
+
+        return ratesDto.getRates();
+    }
+
+    private String getYesterdayDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -1);
+        return sdf.format(cal.getTime());
+    }
+
+    @Override
     public BigDecimal getCurrencyRate(String currency) {
         log.info("Inside getCurrencyRate");
         RatesDTO ratesDto = openExchangeApi.getAllCurrencies(openExchangeKey, baseCurrency);
@@ -69,12 +93,11 @@ public class OpenExchangeServiceImpl implements OpenExchangeService {
         return newRate.subtract(oldRate);
     }
 
-
     // one day
     @Scheduled(fixedRate = 86400000)
     public void updateCurrencies() {
         log.info("Updating Currencies");
-        Map<String, BigDecimal> resultRates = getAllCurrencies();
+        Map<String, BigDecimal> resultRates = getAllCurrenciesYesterday();
         rates.putAll(resultRates);
     }
 }

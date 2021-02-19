@@ -1,11 +1,11 @@
 package com.sakerini.exchange.services.impl;
 
-import com.sakerini.exchange.models.GiphyDTO;
-import com.sakerini.exchange.services.GiphyService;
-import com.sakerini.exchange.services.OpenExchangeService;
 import com.sakerini.exchange.exceptions.BaseException;
 import com.sakerini.exchange.exceptions.CurrencyException;
+import com.sakerini.exchange.models.GiphyDTO;
 import com.sakerini.exchange.services.GifService;
+import com.sakerini.exchange.services.GiphyService;
+import com.sakerini.exchange.services.OpenExchangeService;
 import com.sakerini.exchange.utils.GifTypes;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

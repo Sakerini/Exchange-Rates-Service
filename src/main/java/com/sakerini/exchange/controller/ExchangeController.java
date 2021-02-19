@@ -1,7 +1,7 @@
 package com.sakerini.exchange.controller;
 
-import com.sakerini.exchange.models.GiphyDTO;
 import com.sakerini.exchange.exceptions.BaseException;
+import com.sakerini.exchange.models.GiphyDTO;
 import com.sakerini.exchange.services.GifService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,13 @@ public class ExchangeController {
         this.gifService = gifService;
     }
 
-
+    /**
+     * This Controller's method calls external services and returns a gifs depending on currency rate change
+     *
+     * @param currency the currency to be checked
+     * @return gif
+     * @throws BaseException External Server Errors
+     */
     @GetMapping("/get-currency-gif/{currency}")
     public ResponseEntity<GiphyDTO> getCurrencyGif(@PathVariable(value = "currency") String currency) throws BaseException {
         log.info("Inside getCurrencyGif controller's method body");

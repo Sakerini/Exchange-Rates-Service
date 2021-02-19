@@ -1,7 +1,6 @@
 package com.sakerini.exchange.models.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import com.sakerini.exchange.models.GiphyDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
