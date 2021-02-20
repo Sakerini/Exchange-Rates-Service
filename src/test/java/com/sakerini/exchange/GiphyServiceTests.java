@@ -11,16 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.util.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @SpringBootTest
 public class GiphyServiceTests {
 
-    @MockBean(name = "${giphy.service.name}")
+    @MockBean
     GiphyApi giphyApi;
 
     @Autowired
@@ -37,7 +36,7 @@ public class GiphyServiceTests {
 
         List<GiphyDTO> myGifs = giphyService.getGifs("poor", 1);
 
-        assertThat(myGifs.equals(gifs));
+        Assert.isTrue(myGifs.equals(gifs), "Should be equal");
     }
 
     @Test
@@ -46,11 +45,11 @@ public class GiphyServiceTests {
         gifs.add(new GiphyDTO("1", "http:test.com"));
         gifs.add(new GiphyDTO("2", "http:test.com"));
         gifs.add(new GiphyDTO("3", "http:test.com"));
-        Mockito.when(giphyApi.getGifs(apiKey, "poor", 1)).thenReturn(new GiphyResponse(gifs));
+        Mockito.when(giphyApi.getGifs(apiKey, "poor", 50)).thenReturn(new GiphyResponse(gifs));
 
         GiphyDTO myGif = giphyService.getRandomGif("poor");
-        assertThat(myGif.getId().equals("1") ||
+        Assert.isTrue(myGif.getId().equals("1") ||
                 myGif.getId().equals("2") ||
-                myGif.getId().equals("3"));
+                myGif.getId().equals("3"), "Should return giphy with id 1 ,2 or 3");
     }
 }

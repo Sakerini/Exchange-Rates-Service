@@ -11,10 +11,9 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 public class GifServiceTest {
@@ -37,11 +36,11 @@ public class GifServiceTest {
         Mockito.when(giphyService.getRandomGif(GifTypes.EQUAL.getType())).thenReturn(new GiphyDTO("3", "test"));
 
         GiphyDTO gif = gifService.getGif("RUB");
-        assertThat(gif.getId().equals("3"));
+        Assert.isTrue(gif.getId().equals("3"), "Rub is equal so should return id 3 gif");
         gif = gifService.getGif("BGN");
-        assertThat(gif.getId().equals("1"));
+        Assert.isTrue(gif.getId().equals("1"), "BGN is rich should return id 1 gif");
         gif = gifService.getGif("GBN");
-        assertThat(gif.getId().equals("2"));
+        Assert.isTrue(gif.getId().equals("2"), "GBN is poor should return id 2 gif");
     }
 
 }
