@@ -72,6 +72,9 @@ Docker instructions:
 # Clone this repository
 $ git clone https://github.com/Sakerini/Exchange-Rates-Service.git
 
+# Build
+$ ./gradlew build
+
 # Build Docker Image
 $ docker build -f Dockerfile -t exchangecurrencygif .
 
