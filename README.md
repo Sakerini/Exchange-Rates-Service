@@ -48,10 +48,16 @@ $ ./gradlew build
 $ java -jar build/libs/exchange-0.0.1-SNAPSHOT.jar
 ```
 
-Docker way: To be continued
+Docker instructions:
 
 ```
 # Clone this repository
 $ git clone https://github.com/Sakerini/Exchange-Rates-Service.git
-to be continued
+
+# Build Docker Image
+$ docker build -f Dockerfile -t exchangecurrencygif .
+
+# Run Docker Container
+$ docker run -p 8080:8080 exchangecurrencygif
+
 ```
