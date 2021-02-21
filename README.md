@@ -20,13 +20,31 @@ Requirements
 
 Usage
 =====
-to be continued
+This service responses only to get request with the following endpoint
+```
+http://localhost:8080/api/get-currency-gif/{currency}
+```
+
+Valid currency path variables are 3-letter code:
+
+RUB - Russian Ruble
+
+BGN - Bulgarian lev
+
+USD - United States Dollar
+
+...
+
+Example `http://localhost:8080/api/get-currency-gif/RUB`
+
+Service's response:
 
 ```
-to be continued
-```
-
-to be continued `to be continued` 
+{
+    "id": "qCcoE7b6VHygF0GUFO",
+    "url": "https://giphy.com/gifs/IntoAction-qCcoE7b6VHygF0GUFO"
+}
+``` 
 
 Build
 =====
